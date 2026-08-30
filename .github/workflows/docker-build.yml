@@ -7,7 +7,6 @@ on:
 
 jobs:
   docker-build:
-    needs: docker-build
     runs-on: ubuntu-latest
 
     steps:
