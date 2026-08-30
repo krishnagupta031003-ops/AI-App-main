@@ -45,7 +45,7 @@ jobs:
           docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:v2
           docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:v2
 
-    deploy-test:
+  deploy-test:
     needs: docker-build
     runs-on: ubuntu-latest
 
