@@ -44,7 +44,7 @@ jobs:
           docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:${{ github.sha }}
           docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:${{ github.sha }}
 
-  deploy:
+    deploy-test:
     needs: docker-build
     runs-on: ubuntu-latest
 
@@ -59,7 +59,11 @@ jobs:
           script: |
             cd /home/ec2-user
 
+            echo "Deploying commit: ${{ github.sha }}"
+
             export IMAGE_TAG=${{ github.sha }}
+
+            echo "IMAGE_TAG=$IMAGE_TAG"
 
             aws ecr get-login-password --region us-east-1 | \
             docker login --username AWS --password-stdin \
