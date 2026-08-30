@@ -32,3 +32,8 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Tag Docker images
+        run: |
+          docker tag ai-backend:local 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:v1
+          docker tag ai-frontend:local 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:v1
