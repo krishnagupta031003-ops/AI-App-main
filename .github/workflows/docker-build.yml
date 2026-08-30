@@ -1,0 +1,28 @@
+name: Docker Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  docker-build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build backend image
+        run: docker build -t ai-backend:local ./backend
+
+      - name: Build frontend image
+        run: docker build \
+          --build-arg NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1 \
+          -t ai-frontend:local ./frontend
+
+      - name: Show Docker images
+        run: docker images

@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary-50: #ecfeff;
+  --color-primary-100: #cffafe;
+  --color-primary-200: #a5f3fc;
+  --color-primary-300: #67e8f9;
+  --color-primary-400: #22d3ee;
+  --color-primary-500: #06b6d4;
+  --color-primary-600: #0891b2;
+  --color-primary-700: #0e7490;
+  --color-primary-800: #155e75;
+  --color-primary-900: #164e63;
+
+  --color-accent-purple: #1d4ed8;
+  --color-accent-pink: #14b8a6;
+  --color-accent-cyan: #06b6d4;
+
+}
+
+:root {
+  color-scheme: dark;
+  /* Dark theme backgrounds - Figma design */
+  --app-bg-start: #0D1117;
+  --app-bg-mid: #0D1117;
+  --app-bg-end: #0D1117;
+  --app-sidebar: #161B22;
+  --app-surface: #1A1D29;
+  --app-surface-soft: rgba(26, 29, 41, 0.5);
+  --app-text: #E6EDF3;
+  --app-text-muted: #8B92A8;
+  --app-border: rgba(255, 255, 255, 0.1);
+
+  /* Button colors - Figma design */
+  --btn-gradient-start: #2B7AFB;
+  --btn-gradient-end: #2174FD;
+  --btn-border-start: #174BD2;
+  --btn-border-end: #1B5AC2;
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+  /* Light theme backgrounds - Figma design */
+  --app-bg-start: #FFFFFF;
+  --app-bg-mid: #FFFFFF;
+  --app-bg-end: #FFFFFF;
+  --app-sidebar: #FFFFFF;
+  --app-surface: #FFFFFF;
+  --app-surface-soft: rgba(255, 255, 255, 0.68);
+  --app-text: #19213D;
+  --app-text-muted: #666F8D;
+  --app-border: rgba(0, 0, 0, 0.08);
+
+  /* Button colors - Figma design */
+  --btn-gradient-start: #2B7AFB;
+  --btn-gradient-end: #2174FD;
+  --btn-border-start: #174BD2;
+  --btn-border-end: #1B5AC2;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--app-bg-start);
+}
+
+body {
+  min-height: 100%;
+  background: var(--app-bg-start);
+  color: var(--app-text);
+  position: relative;
+}
+
+/* Background gradient effect from bottom - Figma design */
+body::before {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40vh;
+  background: radial-gradient(ellipse at bottom, rgba(43, 122, 251, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+html[data-theme='light'] body::before {
+  background: radial-gradient(ellipse at bottom, rgba(43, 122, 251, 0.08) 0%, transparent 70%);
+}
+
+::selection {
+  background: rgba(6, 182, 212, 0.35);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gradient-primary {
+  background: linear-gradient(180deg, var(--btn-gradient-start) 0%, var(--btn-gradient-end) 100%);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.gradient-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, var(--btn-border-start) 0%, var(--btn-border-end) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.gradient-text {
+  color: var(--app-text);
+}
+
+.glass {
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 80px rgba(2, 6, 23, 0.45);
+}
+
+.shadow-glow {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.45s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.55s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.2s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.28s ease-out forwards;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
