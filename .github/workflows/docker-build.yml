@@ -57,6 +57,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
 
           script: |
+            set -e
+            
             cd /home/ec2-user
 
             echo "Deploying commit: ${{ github.sha }}"
