@@ -37,3 +37,8 @@ jobs:
         run: |
           docker tag ai-backend:local 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:v1
           docker tag ai-frontend:local 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:v1
+
+      - name: Push Docker images to ECR
+        run: |
+          docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:v1
+          docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:v1     
