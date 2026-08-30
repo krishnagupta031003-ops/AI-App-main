@@ -7,6 +7,7 @@ on:
 
 jobs:
   docker-build:
+    needs: docker-build
     runs-on: ubuntu-latest
 
     steps:
@@ -39,6 +40,23 @@ jobs:
           docker tag ai-frontend:local 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:v2
 
       - name: Push Docker images to ECR
+
         run: |
           docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:v2
           docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:v2
+
+    deploy-test:
+    needs: docker-build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test SSH connection to EC2
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "Connected to EC2 successfully!"
+            whoami
+            docker --version
