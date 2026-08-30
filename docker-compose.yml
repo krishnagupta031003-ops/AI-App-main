@@ -1,26 +1,22 @@
 services:
 
   backend:
-    build:
-      context: ./backend
+    image: 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:${IMAGE_TAG}
     container_name: ai-backend
     env_file:
-      - ./backend/.env
+      - ./backend.env
     ports:
       - "5000:5000"
     networks:
       - myapp-network
 
   frontend:
-    build:
-      context: ./frontend
-      args:
-        NEXT_PUBLIC_API_URL: http://localhost:5000/api/v1
+    image: 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:${IMAGE_TAG}
     container_name: ai-frontend
     depends_on:
       - backend
     ports:
-      - "8080:3000"
+      - "3000:3000"
     networks:
       - myapp-network
 

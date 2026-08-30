@@ -44,7 +44,7 @@ jobs:
           docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:${{ github.sha }}
           docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:${{ github.sha }}
 
-    deploy-test:
+  deploy-test:
     needs: docker-build
     runs-on: ubuntu-latest
 
