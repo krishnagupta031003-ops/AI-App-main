@@ -35,14 +35,14 @@ jobs:
 
       - name: Tag Docker images
         run: |
-          docker tag ai-backend:local 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:v3
-          docker tag ai-frontend:local 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:v3
+          docker tag ai-backend:local 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:${{ github.sha }}
+          docker tag ai-frontend:local 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:${{ github.sha }}
 
       - name: Push Docker images to ECR
 
         run: |
-          docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:v3
-          docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:v3
+          docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-backend:${{ github.sha }}
+          docker push 887731514442.dkr.ecr.us-east-1.amazonaws.com/ai-frontend:${{ github.sha }}
 
   deploy:
     needs: docker-build
@@ -59,7 +59,7 @@ jobs:
           script: |
             cd /home/ec2-user
 
-            export IMAGE_TAG=v3
+            export IMAGE_TAG=${{ github.sha }}
 
             aws ecr get-login-password --region us-east-1 | \
             docker login --username AWS --password-stdin \
