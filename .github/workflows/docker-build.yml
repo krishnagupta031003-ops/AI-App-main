@@ -19,7 +19,7 @@ jobs:
       - name: Build frontend image
         run: |
           docker build \
-            --build-arg NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1 \
+            --build-arg NEXT_PUBLIC_API_URL=http://35.169.124.55:5000/api/v1
             -t ai-frontend:local ./frontend
 
       - name: Configure AWS credentials
